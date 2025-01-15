@@ -19,7 +19,7 @@ function ViewUsers() {
                     return;
                 }
 
-                const response = await axios.get('http://localhost:8082/user/customer', {
+                const response = await axios.get('http://localhost:8082/customer', {
                     auth: {
                         username: storedUsername,
                         password: storedPassword,
