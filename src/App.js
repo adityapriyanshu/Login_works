@@ -9,6 +9,7 @@ import UserProfile from './components/UserProfile';
 import MenuSection from './components/MenuSection';
 import AboutUs from './components/AboutUs';
 import Footer from './components/Footer';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -16,10 +17,9 @@ function App() {
       <Routes>
         <Route path="/" element={<><Navbar /><Home /><HomeMenu /><AboutUs/><Footer/></>} />
         <Route path="/menu" element={<><Navbar /><MenuSection/></>} />
-
+        <Route path="/register" element={<><Register/></>} />
         <Route path="/login" element={<Login />} />
-        // user logged 
-        <Route path="/user-profile" element={<UserProfile />} />
+        <Route path="/user-profile" element={<><Navbar/><UserProfile /></>} />
       </Routes>
     </Router>
   );

@@ -17,8 +17,8 @@ function HomeBody() {
           alignItems: 'center', 
           height: '100%' 
         }}>
-        <Typography variant="h2" color="white" sx={{ mb: 1, mt:20 }}>
-          Welcome to Restaurant Name
+        <Typography variant="h2" color="white" sx={{ mb: 1, mt:20, color:'#ab3434' , fontWeight:'5rem'}}>
+          Welcome to Gourmet Heaven
         </Typography>
         <Typography variant="body1" color="white" sx={{ textAlign: 'center' }}>
           Your friendly neighborhood restaurant serving delicious food.

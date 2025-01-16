@@ -44,7 +44,7 @@ function ViewUsers() {
             {users.length > 0 ? (
                 <ul>
                     {users.map((user) => (
-                        <li key={user.id}>{user.name}</li> // Assuming 'name' is a property in your user data
+                        <li key={user.id}>{user.name}</li> 
                     ))}
                 </ul>
             ) : (
