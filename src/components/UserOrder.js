@@ -60,7 +60,7 @@ const ViewUsers = () => {
             <React.Fragment key={customer.id}>
               <ListItem>
                 <ListItemText
-                  primary={`Customer Name: ${customer.customerName}`}
+                  primary={`Customer Id: ${customer.id} | Customer Name: ${customer.customerName}`}
                   secondary={
                     <>
                       <Typography

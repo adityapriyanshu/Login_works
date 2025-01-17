@@ -21,7 +21,7 @@ const Navbar = () => {
             <AppBar elevation={12} position='fixed' sx={{ backgroundColor: '#ab3434' }}>
                 <Toolbar>
                     <Box sx={{ flexGrow: 1 }} />
-                    <Typography onClick={handleLogoClick} variant='h5' component="div" sx={{ flexGrow: 1, fontFamily: "'Cormorant', 'serif'", textAlign: 'start', ml: 20, cursor: 'pointer' }}>
+                    <Typography onClick={handleLogoClick} variant='h5' component="div" sx={{ flexGrow: 1, fontFamily: "'Cormorant', 'serif'", fontStyle: 'italic', textAlign: 'start', ml: 20, cursor: 'pointer',fontSize:'4.5vh', letterSpacing:'1px' }}>
                         Gourmet Heaven
                     </Typography>
                     <Button color='inherit' href='/menu' sx={{ border: '1px solid white', mx: 1 }}>Menu</Button>

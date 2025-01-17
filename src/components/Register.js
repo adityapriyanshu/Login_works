@@ -11,8 +11,8 @@ const Register = () => {
     const [success, setSuccess] = useState('');
 
     const paperStyle = { padding: '20px  20px 30px 20px', height: 'auto', width: 280, margin: "50px auto",border: '1px solid #ab3434' };
-    const avatarStyle = { backgroundColor: '#1bbd7e' };
-    const btnstyle = { margin: '15px 0', backgroundColor: '#ab3434'  };
+    const avatarStyle = { backgroundColor: '#1bbd7e'};
+    const btnstyle = { margin: '15px 0', backgroundColor: '#ab3434'};
 
     const handleRegister = async () => {
         try {
