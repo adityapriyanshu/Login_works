@@ -53,7 +53,7 @@ const HomeMenu = () => {
           ))}
         </Grid>
         <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-          <Button variant="contained" color="primary" href="/menu">
+          <Button variant="contained" color="primary" sx={{backgroundColor:'#ab3434'}} href="/menu">
             View Full Menu
           </Button>
         </div>

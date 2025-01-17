@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Grid from '@mui/material/Grid2';
@@ -10,7 +11,12 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import image from '../food.png';
+import ShoppingCart from '@mui/icons-material/ShoppingCart';
 
 function MenuSection() {
   const [menuItems, setMenuItems] = useState([]);
@@ -118,16 +124,16 @@ function MenuSection() {
                   {item.foodName}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Price: ${item.foodPrice.toFixed(2)}
+                  Price: ₹{item.foodPrice.toFixed(2)}
                 </Typography>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <IconButton sx={{color:'#ab3434'}} onClick={() => handleRemoveFromCart(item.id)} disabled={!cartItems[item.id]}>
-                    <RemoveIcon fontSize="small"  />
+                  <IconButton sx={{ color: '#ab3434' }} onClick={() => handleRemoveFromCart(item.id)} disabled={!cartItems[item.id]}>
+                    <RemoveIcon fontSize="small" />
                   </IconButton>
                   <Typography variant="body1" style={{ margin: '0 10px' }}>
                     {cartItems[item.id] || 0}
                   </Typography>
-                  <IconButton sx={{color:'green'}} onClick={() => handleAddToCart(item.id)} disabled={cartItems[item.id] >= 5}>
+                  <IconButton sx={{ color: 'green' }} onClick={() => handleAddToCart(item.id)} disabled={cartItems[item.id] >= 5}>
                     <AddIcon fontSize="small" />
                   </IconButton>
                 </div>
@@ -138,22 +144,32 @@ function MenuSection() {
       </Grid>
 
       {/* Cart Section */}
-      <div style={{ marginTop: '2rem' }}>
-        <h2>Cart</h2>
-        <ul>
-          {Object.entries(cartItems).filter(([itemId, quantity]) => quantity > 0).map(([itemId, quantity]) => { // Filter items with quantity > 0
-            const menuItem = menuItems.find((item) => item.id === parseInt(itemId));
-            return (
-              <li key={itemId}>
-                {menuItem.foodName} - Quantity: {quantity} - Price: ${menuItem.foodPrice.toFixed(2)}
-              </li>
-            );
-          })}
-        </ul>
-        <p>Total: ${getCartTotal().toFixed(2)}</p>
+      <Box sx={{ mt: 4 }}>
+        <Paper elevation={6} sx={{ p: 2, mb: '0.5px', display: 'flex', alignItems: 'center', justifyContent: 'center', border:'1px solid #ab3434' }}>
+          <ShoppingCart sx={{ mr: 1 , color:'#ab3434'}} />
+          <Typography variant="h5" gutterBottom> Cart
+          </Typography>
+        </Paper>
+        <Paper elevation={12} sx={{ p: 2, mb: 2, border:'1px solid #ab3434' }}>
+          <ul>
+            {Object.entries(cartItems).filter(([itemId, quantity]) => quantity > 0).map(([itemId, quantity]) => { // Filter items with quantity > 0
+              const menuItem = menuItems.find((item) => item.id === parseInt(itemId));
+              return (
+                <li key={itemId} style={{ listStyleType: 'none', marginBottom: '1rem' }}>
+                  <Typography variant="body1">
+                    {menuItem.foodName} - Quantity: {quantity} - Price: ₹{menuItem.foodPrice.toFixed(2)}
+                  </Typography>
+                </li>
+              );
+            })}
+          </ul>
+          <Typography variant="h6" align="center" sx={{ mt: 2 }}>
+            Total: ₹{getCartTotal().toFixed(2)}
+          </Typography>
+        </Paper>
 
         {/* Order Placement Section */}
-        <div>
+        <Paper elevation={24} sx={{ p: 2 , mt:5, border:'1px solid #ab3434'}}>
           <TextField
             label="Customer Name"
             variant="outlined"
@@ -178,11 +194,11 @@ function MenuSection() {
             value={customerTableNumber}
             onChange={(e) => setCustomerTableNumber(e.target.value)}
           />
-          <Button variant="contained" color="primary" onClick={placeOrder}>
+          <Button variant="contained" color="primary" fullWidth sx={{ mt: 2, backgroundColor:'#ab3434' }} onClick={placeOrder}>
             Place Order
           </Button>
-        </div>
-      </div>
+        </Paper>
+      </Box>
     </div>
   );
 }
