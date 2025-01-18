@@ -28,7 +28,7 @@ const Navbar = () => {
                     {localStorage.getItem('username') ?
 
                         <>
-                            <Button color='inherit' href='/user-profile' sx={{ border: '1px solid white', mx: 1 }}>Orders</Button>
+                            <Button color='inherit' href='/my-orders' sx={{ border: '1px solid white', mx: 1 }}>My Orders</Button>
                             <Button color='inherit' onClick={handleLogout} sx={{ border: '1px solid white', mx: 1 }}>Logout</Button>
                         </> :
                         <Button color='inherit' href='/login' sx={{ border: '1px solid white', mx: 1 }}>Login</Button>

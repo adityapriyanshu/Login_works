@@ -239,10 +239,9 @@
 // }
 
 // export default MenuSection;
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Grid from '@mui/material/Grid'; // Revert back to Grid
+import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -253,7 +252,6 @@ import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import { ToastContainer, toast } from 'react-toastify';
@@ -383,16 +381,19 @@ function MenuSection() {
 
   const paginatedItems = menuItems.slice((page - 1) * itemsPerPage, page * itemsPerPage);
 
+  // Reuse the same styling as the Login form
+  const paperStyle = { padding: '20px  20px 30px 20px', height: 'auto', width: 380, margin: "20px auto", border: '1px solid #ab3434' };
+  const btnstyle = { margin: '15px 0', backgroundColor: '#ab3434' };
+
   return (
     <div style={{ padding: '2rem' }}>
       <ToastContainer />
       <Typography variant="h4" align="center" gutterBottom>
         Full Menu
       </Typography>
-      {/* Use Grid for responsive layout */}
       <Grid container spacing={3}>
         {paginatedItems.map((item) => (
-          <Grid item xs={12} md={6} key={item.id}> {/* 1 column on mobile, 2 columns on desktop */}
+          <Grid item xs={12} md={6} key={item.id}>
             <Card square variant="outlined" sx={{ display: 'flex', alignItems: 'center', width: '100%', border: '1px solid #ab3434', boxShadow: '3px 5px 5px #d9d7b6' }}>
               <CardMedia
                 component="img"
@@ -431,67 +432,67 @@ function MenuSection() {
       />
 
       {/* Cart Section */}
-      <Box sx={{ mt: 4, width: '100%' }}>
-        <Paper elevation={6} sx={{ p: 2, mb: '0.5px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #ab3434', width: '100%' }}>
+      <Paper elevation={24} style={paperStyle}>
+        <Grid align="center">
           <ShoppingCart sx={{ mr: 1, color: '#ab3434' }} />
-          <Typography variant="h5" gutterBottom> Cart
-          </Typography>
-        </Paper>
-        <Paper elevation={12} sx={{ p: 2, mb: 2, border: '1px solid #ab3434', width: '100%' }}>
-          <ul style={{ padding: 0 }}>
-            {Object.entries(cartItems).filter(([itemId, quantity]) => quantity > 0).map(([itemId, quantity]) => {
-              const menuItem = menuItems.find((item) => item.id === parseInt(itemId));
-              return (
-                <li key={itemId} style={{ listStyleType: 'none', marginBottom: '1rem' }}>
-                  <Typography variant="body1">
-                    {menuItem.foodName} - Quantity: {quantity} - Price: ₹{menuItem.foodPrice.toFixed(2)}
-                  </Typography>
-                </li>
-              );
-            })}
-          </ul>
-          <Typography variant="h6" align="center" sx={{ mt: 2 }}>
-            Total: ₹{getCartTotal().toFixed(2)}
-          </Typography>
-        </Paper>
+          <Typography variant="h5" gutterBottom>Cart</Typography>
+        </Grid>
+        <ul style={{ padding: 0 }}>
+          {Object.entries(cartItems).filter(([itemId, quantity]) => quantity > 0).map(([itemId, quantity]) => {
+            const menuItem = menuItems.find((item) => item.id === parseInt(itemId));
+            return (
+              <li key={itemId} style={{ listStyleType: 'none', marginBottom: '1rem' }}>
+                <Typography variant="body1">
+                  {menuItem.foodName} - Quantity: {quantity} - Price: ₹{menuItem.foodPrice.toFixed(2)}
+                </Typography>
+              </li>
+            );
+          })}
+        </ul>
+        <Typography variant="h6" align="center" sx={{ mt: 2 }}>
+          Total: ₹{getCartTotal().toFixed(2)}
+        </Typography>
+      </Paper>
 
-        {/* Order Placement Section */}
-        <Paper elevation={24} sx={{ p: 2, mt: 5, border: '1px solid #ab3434', width: '100%' }}>
-          <TextField
-            label="Customer Name"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
-            error={!!validationErrors.customerName}
-            helperText={validationErrors.customerName}
-          />
-          <TextField
-            label="Phone Number"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={customerPhoneNumber}
-            onChange={(e) => setCustomerPhoneNumber(e.target.value)}
-            error={!!validationErrors.customerPhoneNumber}
-            helperText={validationErrors.customerPhoneNumber}
-          />
-          <TextField
-            label="Table Number"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={customerTableNumber}
-            onChange={(e) => setCustomerTableNumber(e.target.value)}
-            error={!!validationErrors.customerTableNumber}
-            helperText={validationErrors.customerTableNumber}
-          />
-          <Button variant="contained" color="primary" fullWidth sx={{ mt: 2, backgroundColor: '#ab3434' }} onClick={placeOrder}>
-            Place Order
-          </Button>
-        </Paper>
-      </Box>
+      {/* Order Placement Section */}
+      <Paper elevation={24} style={paperStyle}>
+        <Grid align="center">
+          <Typography variant="h5" gutterBottom>Place Order</Typography>
+        </Grid>
+        <TextField
+          label="Customer Name"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={customerName}
+          onChange={(e) => setCustomerName(e.target.value)}
+          error={!!validationErrors.customerName}
+          helperText={validationErrors.customerName}
+        />
+        <TextField
+          label="Phone Number"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={customerPhoneNumber}
+          onChange={(e) => setCustomerPhoneNumber(e.target.value)}
+          error={!!validationErrors.customerPhoneNumber}
+          helperText={validationErrors.customerPhoneNumber}
+        />
+        <TextField
+          label="Table Number"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={customerTableNumber}
+          onChange={(e) => setCustomerTableNumber(e.target.value)}
+          error={!!validationErrors.customerTableNumber}
+          helperText={validationErrors.customerTableNumber}
+        />
+        <Button variant="contained" color="primary" fullWidth style={btnstyle} onClick={placeOrder}>
+          Place Order
+        </Button>
+      </Paper>
     </div>
   );
 }
