@@ -14,38 +14,39 @@ const HomeMenu = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get('http://localhost:8082/menu/view'); // Replace with your backend API endpoint
-          setMenuItems(response.data.data.slice(0, 3)); // Get first 3 items for initial display
+          const response = await axios.get('http://localhost:8082/menu/view'); 
+          setMenuItems(response.data.data.slice(0, 3)); // Get first 3 items for display
         } catch (error) {
           console.error('Error fetching menu items:', error);
         }
       };
       fetchData();
     }, []);
+
+    const handleOnclickMenu = () =>{
+      window.location.href="/menu"
+    }
   
     return (
       <div style={{ padding: '2rem' }}> 
-        <Typography variant="h4" align="center" gutterBottom>
+        <Typography color='black' variant="h4" align="center" gutterBottom>
           Pick from variety of cuisines
         </Typography>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} onClick={handleOnclickMenu} sx={{cursor:'pointer'}}>
           {menuItems.map((item) => (
             <Grid size={4} item xs={6} key={item.id}>
               <Card elevation={8} sx={{ display: 'flex' }}>
                 <CardMedia
                   component="img"
-                  sx={{ width: 180 }}
+                  sx={{ width: 180, height:150 }}
                   image={image}
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="h5" component="h2" mt={1}>
                     {item.foodName}
                   </Typography>
-                  <Typography gutterBottom variant="h6" component="h2">
-                    ${item.foodPrice}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {"lorem ispum asirae naieowen oriaien glfg"}
+                  <Typography gutterBottom variant="h6" component="h2" pl={1} mt={2}>
+                  ₹{item.foodPrice}.00
                   </Typography>
                 </CardContent>
               </Card>

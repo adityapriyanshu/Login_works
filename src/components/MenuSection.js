@@ -1,4 +1,3 @@
-
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
 // import Grid from '@mui/material/Grid2';
@@ -13,10 +12,11 @@
 // import Button from '@mui/material/Button';
 // import Paper from '@mui/material/Paper';
 // import Box from '@mui/material/Box';
-// import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-// import image from '../food.png';
+// import Pagination from '@mui/material/Pagination';
 // import ShoppingCart from '@mui/icons-material/ShoppingCart';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import image from '../food.png';
 
 // function MenuSection() {
 //   const [menuItems, setMenuItems] = useState([]);
@@ -24,6 +24,9 @@
 //   const [customerName, setCustomerName] = useState('');
 //   const [customerPhoneNumber, setCustomerPhoneNumber] = useState('');
 //   const [customerTableNumber, setCustomerTableNumber] = useState('');
+//   const [page, setPage] = useState(1); // Pagination state
+//   const itemsPerPage = 6;
+
 
 //   useEffect(() => {
 //     const fetchData = async () => {
@@ -67,10 +70,28 @@
 //     }, 0);
 //   };
 
+
+//   // Order placing button handler function
 //   const placeOrder = async () => {
+//     if (Object.keys(cartItems).length === 0) {
+//       toast.error('Cart cannot be empty!', {
+//         position: "top-center",
+//         autoClose: 1500,
+//         hideProgressBar: false,
+//         closeOnClick: false,
+//         pauseOnHover: false,
+//         draggable: true,
+//         progress: undefined,
+//         theme: "dark"
+//       });
+//       return;
+//     }
+
 //     // Retrieve stored credentials (if available)
 //     const storedUsername = localStorage.getItem('username');
 //     const storedPassword = localStorage.getItem('password');
+
+
 
 //     if (!storedUsername || !storedPassword) {
 //       console.error('User credentials not found in local storage.');
@@ -101,17 +122,24 @@
 //       setCustomerTableNumber('');
 //     } catch (error) {
 //       console.error('Error placing order:', error);
-//       // Handle order placement error
+
 //     }
 //   };
 
+//   const handleChangePage = (event, value) => {
+//     setPage(value);
+//   };
+
+//   const paginatedItems = menuItems.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+
 //   return (
 //     <div style={{ padding: '2rem' }}>
+//       <ToastContainer />
 //       <Typography variant="h4" align="center" gutterBottom>
 //         Full Menu
 //       </Typography>
 //       <Grid container spacing={3}>
-//         {menuItems.map((item) => (
+//         {paginatedItems.map((item) => (
 //           <Grid size={6} item xs={12} key={item.id}>
 //             <Card square variant="outlined" sx={{ display: 'flex', alignItems: 'center', width: '500px', border: '1px solid #ab3434', boxShadow: '3px 5px 5px #d9d7b6' }}>
 //               <CardMedia
@@ -142,15 +170,22 @@
 //           </Grid>
 //         ))}
 //       </Grid>
+//       <Pagination
+//         count={Math.ceil(menuItems.length / itemsPerPage)}
+//         page={page}
+//         onChange={handleChangePage}
+//         color="primary"
+//         sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}
+//       />
 
 //       {/* Cart Section */}
 //       <Box sx={{ mt: 4 }}>
-//         <Paper elevation={6} sx={{ p: 2, mb: '0.5px', display: 'flex', alignItems: 'center', justifyContent: 'center', border:'1px solid #ab3434' }}>
-//           <ShoppingCart sx={{ mr: 1 , color:'#ab3434'}} />
+//         <Paper elevation={6} sx={{ p: 2, mb: '0.5px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #ab3434' }}>
+//           <ShoppingCart sx={{ mr: 1, color: '#ab3434' }} />
 //           <Typography variant="h5" gutterBottom> Cart
 //           </Typography>
 //         </Paper>
-//         <Paper elevation={12} sx={{ p: 2, mb: 2, border:'1px solid #ab3434' }}>
+//         <Paper elevation={12} sx={{ p: 2, mb: 2, border: '1px solid #ab3434' }}>
 //           <ul>
 //             {Object.entries(cartItems).filter(([itemId, quantity]) => quantity > 0).map(([itemId, quantity]) => { // Filter items with quantity > 0
 //               const menuItem = menuItems.find((item) => item.id === parseInt(itemId));
@@ -169,7 +204,7 @@
 //         </Paper>
 
 //         {/* Order Placement Section */}
-//         <Paper elevation={24} sx={{ p: 2 , mt:5, border:'1px solid #ab3434'}}>
+//         <Paper elevation={24} sx={{ p: 2, mt: 5, border: '1px solid #ab3434' }}>
 //           <TextField
 //             label="Customer Name"
 //             variant="outlined"
@@ -194,7 +229,7 @@
 //             value={customerTableNumber}
 //             onChange={(e) => setCustomerTableNumber(e.target.value)}
 //           />
-//           <Button variant="contained" color="primary" fullWidth sx={{ mt: 2, backgroundColor:'#ab3434' }} onClick={placeOrder}>
+//           <Button variant="contained" color="primary" fullWidth sx={{ mt: 2, backgroundColor: '#ab3434' }} onClick={placeOrder}>
 //             Place Order
 //           </Button>
 //         </Paper>
@@ -205,10 +240,9 @@
 
 // export default MenuSection;
 
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid'; // Revert back to Grid
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -222,15 +256,18 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import image from '../food.png';
 
 function MenuSection() {
   const [menuItems, setMenuItems] = useState([]);
-  const [cartItems, setCartItems] = useState({}); // Object to store cart items and their quantities
+  const [cartItems, setCartItems] = useState({});
   const [customerName, setCustomerName] = useState('');
   const [customerPhoneNumber, setCustomerPhoneNumber] = useState('');
   const [customerTableNumber, setCustomerTableNumber] = useState('');
-  const [page, setPage] = useState(1); // Pagination state
+  const [page, setPage] = useState(1);
+  const [validationErrors, setValidationErrors] = useState({});
   const itemsPerPage = 6;
 
   useEffect(() => {
@@ -253,7 +290,7 @@ function MenuSection() {
       } else if (change === 'decrement' && newCartItems[itemId] > 0) {
         newCartItems[itemId] -= 1;
         if (newCartItems[itemId] === 0) {
-          delete newCartItems[itemId]; // Remove item if quantity is 0
+          delete newCartItems[itemId];
         }
       }
       return newCartItems;
@@ -276,13 +313,25 @@ function MenuSection() {
   };
 
   const placeOrder = async () => {
-    // Retrieve stored credentials (if available)
+    if (Object.keys(cartItems).length === 0) {
+      toast.error('Cart cannot be empty!', {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark"
+      });
+      return;
+    }
+
     const storedUsername = localStorage.getItem('username');
     const storedPassword = localStorage.getItem('password');
 
     if (!storedUsername || !storedPassword) {
       console.error('User credentials not found in local storage.');
-      // Handle the case where credentials are not available (e.g., prompt for login)
       return;
     }
 
@@ -303,13 +352,28 @@ function MenuSection() {
         },
       });
       console.log('Order placed successfully:', response.data);
-      // Handle successful order placement (e.g., clear cart, show confirmation message)
       setCustomerName('');
       setCustomerPhoneNumber('');
       setCustomerTableNumber('');
+      setCartItems({});
+      setValidationErrors({});
+      toast.success('Order placed successfully!', {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark"
+      });
     } catch (error) {
       console.error('Error placing order:', error);
-      // Handle order placement error
+      if (error.response && error.response.data && error.response.data.data) {
+        setValidationErrors(error.response.data.data);
+      } else {
+        setValidationErrors({});
+      }
     }
   };
 
@@ -321,13 +385,15 @@ function MenuSection() {
 
   return (
     <div style={{ padding: '2rem' }}>
+      <ToastContainer />
       <Typography variant="h4" align="center" gutterBottom>
         Full Menu
       </Typography>
+      {/* Use Grid for responsive layout */}
       <Grid container spacing={3}>
         {paginatedItems.map((item) => (
-          <Grid size={6} item xs={12} key={item.id}>
-            <Card square variant="outlined" sx={{ display: 'flex', alignItems: 'center', width: '500px', border: '1px solid #ab3434', boxShadow: '3px 5px 5px #d9d7b6' }}>
+          <Grid item xs={12} md={6} key={item.id}> {/* 1 column on mobile, 2 columns on desktop */}
+            <Card square variant="outlined" sx={{ display: 'flex', alignItems: 'center', width: '100%', border: '1px solid #ab3434', boxShadow: '3px 5px 5px #d9d7b6' }}>
               <CardMedia
                 component="img"
                 sx={{ width: 150, height: 150, mr: 2 }}
@@ -356,24 +422,24 @@ function MenuSection() {
           </Grid>
         ))}
       </Grid>
-      <Pagination 
-        count={Math.ceil(menuItems.length / itemsPerPage)} 
-        page={page} 
-        onChange={handleChangePage} 
-        color="primary" 
+      <Pagination
+        count={Math.ceil(menuItems.length / itemsPerPage)}
+        page={page}
+        onChange={handleChangePage}
+        color="primary"
         sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}
       />
 
       {/* Cart Section */}
-      <Box sx={{ mt: 4 }}>
-        <Paper elevation={6} sx={{ p: 2, mb: '0.5px', display: 'flex', alignItems: 'center', justifyContent: 'center', border:'1px solid #ab3434' }}>
-          <ShoppingCart sx={{ mr: 1 , color:'#ab3434'}} />
+      <Box sx={{ mt: 4, width: '100%' }}>
+        <Paper elevation={6} sx={{ p: 2, mb: '0.5px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #ab3434', width: '100%' }}>
+          <ShoppingCart sx={{ mr: 1, color: '#ab3434' }} />
           <Typography variant="h5" gutterBottom> Cart
           </Typography>
         </Paper>
-        <Paper elevation={12} sx={{ p: 2, mb: 2, border:'1px solid #ab3434' }}>
-          <ul>
-            {Object.entries(cartItems).filter(([itemId, quantity]) => quantity > 0).map(([itemId, quantity]) => { // Filter items with quantity > 0
+        <Paper elevation={12} sx={{ p: 2, mb: 2, border: '1px solid #ab3434', width: '100%' }}>
+          <ul style={{ padding: 0 }}>
+            {Object.entries(cartItems).filter(([itemId, quantity]) => quantity > 0).map(([itemId, quantity]) => {
               const menuItem = menuItems.find((item) => item.id === parseInt(itemId));
               return (
                 <li key={itemId} style={{ listStyleType: 'none', marginBottom: '1rem' }}>
@@ -390,7 +456,7 @@ function MenuSection() {
         </Paper>
 
         {/* Order Placement Section */}
-        <Paper elevation={24} sx={{ p: 2 , mt:5, border:'1px solid #ab3434'}}>
+        <Paper elevation={24} sx={{ p: 2, mt: 5, border: '1px solid #ab3434', width: '100%' }}>
           <TextField
             label="Customer Name"
             variant="outlined"
@@ -398,6 +464,8 @@ function MenuSection() {
             margin="normal"
             value={customerName}
             onChange={(e) => setCustomerName(e.target.value)}
+            error={!!validationErrors.customerName}
+            helperText={validationErrors.customerName}
           />
           <TextField
             label="Phone Number"
@@ -406,6 +474,8 @@ function MenuSection() {
             margin="normal"
             value={customerPhoneNumber}
             onChange={(e) => setCustomerPhoneNumber(e.target.value)}
+            error={!!validationErrors.customerPhoneNumber}
+            helperText={validationErrors.customerPhoneNumber}
           />
           <TextField
             label="Table Number"
@@ -414,8 +484,10 @@ function MenuSection() {
             margin="normal"
             value={customerTableNumber}
             onChange={(e) => setCustomerTableNumber(e.target.value)}
+            error={!!validationErrors.customerTableNumber}
+            helperText={validationErrors.customerTableNumber}
           />
-          <Button variant="contained" color="primary" fullWidth sx={{ mt: 2, backgroundColor:'#ab3434' }} onClick={placeOrder}>
+          <Button variant="contained" color="primary" fullWidth sx={{ mt: 2, backgroundColor: '#ab3434' }} onClick={placeOrder}>
             Place Order
           </Button>
         </Paper>
@@ -425,4 +497,3 @@ function MenuSection() {
 }
 
 export default MenuSection;
-
