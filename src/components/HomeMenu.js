@@ -4,7 +4,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import image from '../food.png';
 import { Button } from '@mui/material';
 import axios from 'axios';
 
@@ -39,7 +38,7 @@ const HomeMenu = () => {
                 <CardMedia
                   component="img"
                   sx={{ width: 180, height:150 }}
-                  image={image}
+                  image={'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500'}
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography gutterBottom variant="h5" component="h2" mt={1}>

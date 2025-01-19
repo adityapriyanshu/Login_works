@@ -256,7 +256,6 @@ import Pagination from '@mui/material/Pagination';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import image from '../food.png';
 
 function MenuSection() {
   const [menuItems, setMenuItems] = useState([]);
@@ -398,7 +397,7 @@ function MenuSection() {
               <CardMedia
                 component="img"
                 sx={{ width: 150, height: 150, mr: 2 }}
-                image={image}
+                image={'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500'}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">

@@ -2,14 +2,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
-import Login from './components/Login';
+import Login from './components/common/Login';
 import HomeMenu from './components/HomeMenu';
-import Navbar from './components/Navbar';
+import Navbar from './components/common/Navbar';
 import MyOrders from './components/MyOrders';
 import MenuSection from './components/MenuSection';
 import AboutUs from './components/AboutUs';
-import Footer from './components/Footer';
-import Register from './components/Register';
+import Footer from './components/common/Footer';
+import Register from './components/common/Register';
+import AllOrders from './components/AllOrders';
+import Admin from './components/Admin';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/register" element={<><Register/></>} />
         <Route path="/login" element={<Login />} />
         <Route path="/my-orders" element={<><Navbar/><MyOrders /></>} />
+        <Route path="/all-orders" element={<><Navbar/><AllOrders/></>} />
+        <Route path="/admin" element={<><Navbar/><Admin/></>} />
       </Routes>
     </Router>
   );
