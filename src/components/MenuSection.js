@@ -295,6 +295,10 @@ function MenuSection() {
   };
 
   const handleAddToCart = (itemId) => {
+    if(!localStorage.getItem('username')){
+      toast.error('Login into your account!')
+      return;
+    }
     handleQuantityChange(itemId, 'increment');
   };
 
@@ -310,6 +314,11 @@ function MenuSection() {
   };
 
   const placeOrder = async () => {
+    if(!localStorage.getItem('username')){
+      toast.error('Login into your account!')
+      return;
+    }
+
     if (Object.keys(cartItems).length === 0) {
       toast.error('Cart cannot be empty!', {
         position: "top-center",
