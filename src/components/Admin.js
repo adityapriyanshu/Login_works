@@ -1549,7 +1549,7 @@ const AdminPage = () => {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h4" align="center" gutterBottom>
+      <Typography variant="h4" align="center" gutterBottom mt={5}>
         Admin Page
       </Typography>
 
@@ -1620,7 +1620,7 @@ const AdminPage = () => {
       <Grid container spacing={3}>
         {menuItems.map((menuItem) => (
           <Grid item xs={12} sm={6} key={menuItem.id}>
-            <Paper elevation={3} sx={{ p: 2 }}>
+            <Paper elevation={6} sx={{ p: 2 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <Box
                   sx={{

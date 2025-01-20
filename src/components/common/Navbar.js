@@ -1,134 +1,3 @@
-// // import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material'
-// // import React from 'react'
-// // import '@fontsource/cormorant/600.css';
-
-// // const Navbar = () => {
-
-// //     const handleLogout = () => {
-// //         localStorage.removeItem('username');
-// //         localStorage.removeItem('password');
-// //         localStorage.removeItem('role');
-// //         window.location.href = '/';
-// //     }
-
-// //     const handleLogoClick = () => {
-
-// //         window.location.href = '/';
-// //     }
-
-// //     return (
-// //         <Box sx={{ flexGrow: 1 }}>
-// //             <AppBar elevation={12} position='fixed' sx={{ backgroundColor: '#ab3434' }}>
-// //                 <Toolbar>
-// //                     <Box sx={{ flexGrow: 1 }} />
-// //                     <Typography onClick={handleLogoClick} variant='h5' component="div" sx={{ flexGrow: 1, fontFamily: "'Cormorant', 'serif'", fontStyle: 'italic', textAlign: 'start', ml: 20, cursor: 'pointer',fontSize:'4.5vh', letterSpacing:'1px' }}>
-// //                         Gourmet Heaven
-// //                     </Typography>
-// //                     <Button color='inherit' href='/menu' sx={{ border: '1px solid white', mx: 1 }}>Menu</Button>
-// //                     {localStorage.getItem('username') ?
-                        
-// //                         <>
-// //                             <Button color='inherit' href='/my-orders' sx={{ border: '1px solid white', mx: 1 }}>My Orders</Button>
-// //                             <Button color='inherit' onClick={handleLogout} sx={{ border: '1px solid white', mx: 1 }}>Logout</Button>
-// //                         </> :
-// //                         <Button color='inherit' href='/login' sx={{ border: '1px solid white', mx: 1 }}>Login</Button>
-                        
-// //                     }
-// //                 </Toolbar>
-// //             </AppBar>
-// //         </Box>
-// //     )
-// // }
-
-// // export default Navbar
-
-// import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
-// import React from 'react';
-// import '@fontsource/cormorant/600.css';
-
-// const Navbar = () => {
-//   const handleLogout = () => {
-//     localStorage.removeItem('username');
-//     localStorage.removeItem('password');
-//     localStorage.removeItem('role');
-//     window.location.href = '/';
-//   };
-
-//   const handleLogoClick = () => {
-//     window.location.href = '/';
-//   };
-
-//   const username = localStorage.getItem('username');
-//   const role = localStorage.getItem('role');
-
-//   return (
-//     <Box sx={{ flexGrow: 1 }}>
-//       <AppBar elevation={12} position="fixed" sx={{ backgroundColor: '#ab3434' }}>
-//         <Toolbar>
-//           <Box sx={{ flexGrow: 1 }} />
-//           <Typography
-//             onClick={handleLogoClick}
-//             variant="h5"
-//             component="div"
-//             sx={{
-//               flexGrow: 1,
-//               fontFamily: "'Cormorant', 'serif'",
-//               fontStyle: 'italic',
-//               textAlign: 'start',
-//               ml: 20,
-//               cursor: 'pointer',
-//               fontSize: '4.5vh',
-//               letterSpacing: '1px',
-//             }}
-//           >
-//             Gourmet Heaven
-//           </Typography>
-//           {/* MENU Button */}
-//           <Button color="inherit" href="/menu" sx={{ border: '1px solid white', mx: 1 }}>
-//             Menu
-//           </Button>
-
-//             {/* Check the role and show navbar */}
-//           {username ? (
-//             role === 'ROLE_CUSTOMER' ? (
-//               // Show Menu, My Orders, and Logout for customers
-//               <>
-//                 <Button color="inherit" href="/my-orders" sx={{ border: '1px solid white', mx: 1 }}>
-//                   My Orders
-//                 </Button>
-//                 <Button color="inherit" onClick={handleLogout} sx={{ border: '1px solid white', mx: 1 }}>
-//                   Logout
-//                 </Button>
-//               </>
-//             ) : role === 'ROLE_ADMIN' ? (
-//               // Show Menu, All Orders, and Logout for admins
-//               <>
-//                 <Button color="inherit" href="/all-orders" sx={{ border: '1px solid white', mx: 1 }}>
-//                   Orders
-//                 </Button>
-//                 <Button color="inherit" href="/admin" sx={{ border: '1px solid white', mx: 1 }}>
-//                   Admin
-//                 </Button>
-//                 <Button color="inherit" onClick={handleLogout} sx={{ border: '1px solid white', mx: 1 }}>
-//                   Logout
-//                 </Button>
-//               </>
-//             ) : null
-//           ) : (
-//             // Show Login button if user is not logged in
-//             <Button color="inherit" href="/login" sx={{ border: '1px solid white', mx: 1 }}>
-//               Login
-//             </Button>
-//           )}
-//         </Toolbar>
-//       </AppBar>
-//     </Box>
-//   );
-// };
-
-// export default Navbar;
-
-
 import React, { useState } from 'react';
 import {
   AppBar,
@@ -232,10 +101,10 @@ const Navbar = () => {
               flexGrow: 1,
               fontFamily: "'Cormorant', 'serif'",
               fontStyle: 'italic',
-              textAlign: 'start',
+              textAlign: 'center',
               ml: isMobile ? 0 : 20,
               cursor: 'pointer',
-              fontSize: '4.5vh',
+              fontSize: isMobile ? '2.5vh' : '4.5vh',
               letterSpacing: '1px',
             }}
           >
