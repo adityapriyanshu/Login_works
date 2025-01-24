@@ -121,7 +121,7 @@ const AllOrders = () => {
                 Customer: {customer.customerName}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                Phone: {customer.customerPhoneNumber} | Table: {customer.customerTableNumber}
+                Phone: {customer.customerPhoneNumber} | Address: {customer.customerAddress}
               </Typography>
               <Divider sx={{ my: 2 }} />
               <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>

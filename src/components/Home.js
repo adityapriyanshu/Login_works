@@ -40,7 +40,7 @@ const HomeBody = () => {
           position: 'relative',
           zIndex: 1,
           textAlign: 'center',
-          px: isMobile ? 2 : 0, // Add horizontal padding for mobile
+          px: isMobile ? 2 : 0,
         }}
       >
         <Typography
@@ -49,11 +49,11 @@ const HomeBody = () => {
           sx={{
             mb: 1,
             pt: isMobile ? 10: 0,
-            mt: isMobile ? 10 : 20, // Adjust top margin for mobile
+            mt: isMobile ? 10 : 20, 
             fontFamily: "'Cormorant', 'serif'",
             fontWeight: 700,
             fontStyle: 'italic',
-            fontSize: isMobile ? '6vh' : '14vh', // Adjust font size for mobile
+            fontSize: isMobile ? '6vh' : '14vh', 
           }}
         >
           Welcome to Gourmet Heaven
@@ -63,8 +63,8 @@ const HomeBody = () => {
           color="white"
           sx={{
             textAlign: 'center',
-            fontSize: isMobile ? '2.5vh' : 'inherit', // Adjust font size for mobile
-            px: isMobile ? 5 : 0, // Add horizontal padding for mobile
+            fontSize: isMobile ? '2.5vh' : 'inherit', 
+            px: isMobile ? 5 : 0, 
           }}
         >
           Your friendly neighbourhood restaurant serving delicious food.
