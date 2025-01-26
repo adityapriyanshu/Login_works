@@ -57,7 +57,7 @@ const Login = () => {
     }
   };
 
-  return (
+  return ( 
     <Grid2
       container
       spacing={0}
@@ -72,7 +72,7 @@ const Login = () => {
       <Grid2>
         <Paper elevation={24} style={paperStyle}>
           <Grid2 container justifyContent="center">
-            <h3 style={{ margin: '10px' }}>Login</h3>
+            <h2 style={{ marginBottom: '10px' }}>Login</h2>
           </Grid2>
           <Grid2 container justifyContent="center">
             <h3 style={{ color: '#ab3434', fontFamily: 'areial' }}>Welcome to Gourmet Heaven</h3>

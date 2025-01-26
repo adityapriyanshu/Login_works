@@ -70,7 +70,7 @@ const AllOrders = () => {
         },
       });
 
-      // Remove the deleted order from the state
+      // Remove the deleted order from the state using filter
       setCustomers((prevCustomers) =>
         prevCustomers.filter((customer) => customer.id !== orderId)
       );
@@ -92,16 +92,19 @@ const AllOrders = () => {
         minHeight: '100vh',
       }}
     >
-      <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', color: '#ab3434', mb: 3 }}>
+      <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', color: '#ab3434', mb: 1, mt:6 }}>
         Order History
       </Typography>
+
       {loading ? ( // Show loader while data is being fetched
         <CircularProgress sx={{ color: '#ab3434' }} />
       ) : error ? ( // Show error message if there's an error
         <Typography variant="body2" color="error" align="center">
           {error}
         </Typography>
-      ) : customers.length > 0 ? ( // Show orders if data is loaded
+      ) : 
+      
+      customers.length > 0 ? ( // Show orders if data is loaded
         <Box sx={{ width: '100%', maxWidth: 500 }}>
           {customers.map((customer) => (
             <Paper
@@ -131,12 +134,13 @@ const AllOrders = () => {
                 {Array.from(
                   new Set(customer.orderItems.map((item) => item.foodName))
                 ).map((foodName) => {
+
                   const quantity = customer.orderItems.filter(
-                    (item) => item.foodName === foodName
-                  ).length;
+                    (item) => item.foodName === foodName).length;
+
                   const foodPrice = customer.orderItems.find(
-                    (item) => item.foodName === foodName
-                  ).foodPrice;
+                    (item) => item.foodName === foodName).foodPrice;
+
                   return (
                     <ListItem key={foodName} sx={{ py: 0.5 }}>
                       <ListItemText
@@ -146,8 +150,11 @@ const AllOrders = () => {
                     </ListItem>
                   );
                 })}
+
               </List>
+
               <Divider sx={{ my: 2 }} />
+
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
                   Total: ₹{customer.totalPrice.toFixed(2)}

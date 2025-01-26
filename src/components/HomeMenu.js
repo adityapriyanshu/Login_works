@@ -11,6 +11,7 @@ import { useTheme } from '@mui/material/styles';
 
 // Function to dynamically import images
 const importAll = (r) => {
+  // images - An empty object to store the imported images.
   let images = {};
   r.keys().forEach((item, index) => {
     images[item.replace('./', '')] = r(item);
@@ -18,7 +19,7 @@ const importAll = (r) => {
   return images;
 };
 
-// Import all images from the Images directory
+// Import all images from the Images directory and store it in 'images' variable
 const images = importAll(require.context('./Images', false, /\.(png|jpe?g|svg)$/));
 
 const HomeMenu = () => {

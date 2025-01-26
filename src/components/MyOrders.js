@@ -15,7 +15,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const MyOrders = () => {
-  const [customers, setCustomers] = useState([]);
+  const [customerOrders, setCustomerOrders] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -35,6 +35,7 @@ const MyOrders = () => {
 
       const user = storedUsername.toLowerCase();
 
+      // search orders by username
       const response = await axios.get(`http://localhost:8082/byUsername/${user}`, {
         auth: {
           username: storedUsername,
@@ -45,7 +46,7 @@ const MyOrders = () => {
 
       // Sort orders in descending order by ID (most recent first)
       const sortedCustomers = response.data.data.sort((a, b) => b.id - a.id);
-      setCustomers(sortedCustomers);
+      setCustomerOrders(sortedCustomers);
     } catch (error) {
       setError('Error fetching customers: ' + error.message);
     }
@@ -69,7 +70,7 @@ const MyOrders = () => {
       });
 
       // Remove the deleted order from the state
-      setCustomers((prevCustomers) =>
+      setCustomerOrders((prevCustomers) =>
         prevCustomers.filter((customer) => customer.id !== orderId)
       );
 
@@ -90,7 +91,7 @@ const MyOrders = () => {
         minHeight: '100vh',
       }}
     >
-      <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', color: '#ab3434', mb: 3 }}>
+      <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' ,color: '#ab3434', mb: 1, mt:6 }}>
         Order History
       </Typography>
       {error && (
@@ -98,9 +99,10 @@ const MyOrders = () => {
           {error}
         </Typography>
       )}
-      {customers.length > 0 ? (
+      {customerOrders.length > 0 ? (
         <Box sx={{ width: '100%', maxWidth: 500 }}>
-          {customers.map((customer) => (
+          
+          {customerOrders.map((customer) => (
             <Paper
               key={customer.id}
               elevation={3}
@@ -124,27 +126,35 @@ const MyOrders = () => {
               <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
                 Order Items:
               </Typography>
+
               <List dense>
                 {Array.from(
-                  new Set(customer.orderItems.map((item) => item.foodName))
+                  new Set(customer.orderItems.map((item) => item.foodName)) 
+                  // this function extras from json like this : ['Pizza', 'Burger', 'Pasta']
+                
                 ).map((foodName) => {
+                  // go through each food item, calculate quantity, price and then show it as list.
                   const quantity = customer.orderItems.filter(
-                    (item) => item.foodName === foodName
-                  ).length;
+                    (item) => item.foodName === foodName).length;
+
                   const foodPrice = customer.orderItems.find(
-                    (item) => item.foodName === foodName
-                  ).foodPrice;
+                    (item) => item.foodName === foodName).foodPrice;
+
                   return (
-                    <ListItem key={foodName} sx={{ py: 0.5 }}>
+                    <ListItem key={foodName} sx={{ py: 0.5 }}> 
                       <ListItemText
                         primary={`${foodName} (x${quantity})`}
                         secondary={`₹${(quantity * foodPrice).toFixed(2)}`}
                       />
                     </ListItem>
                   );
-                })}
+                }
+
+                )}
               </List>
+
               <Divider sx={{ my: 2 }} />
+
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
                   Total: ₹{customer.totalPrice.toFixed(2)}
@@ -160,6 +170,7 @@ const MyOrders = () => {
             </Paper>
           ))}
         </Box>
+
       ) : (
         <Typography variant="body2" align="center">
           No orders found.

@@ -78,6 +78,17 @@ const Register = () => {
   };
 
   return (
+    <Grid
+      container
+      spacing={0}
+      sx={{
+        backgroundColor: '#2c3e50', // Set the background color for the entire page
+        minHeight: '100vh', // Ensure the background covers the full height of the page
+        display: 'flex',
+        alignItems: 'center', // Center the login form vertically
+        justifyContent: 'center', // Center the login form horizontally
+      }}
+    >
     <Grid>
       <Paper elevation={24} style={paperStyle}>
         <Grid align="center">
@@ -132,6 +143,7 @@ const Register = () => {
           </Link>
         </Typography>
       </Paper>
+    </Grid>
       <ToastContainer />
     </Grid>
   );

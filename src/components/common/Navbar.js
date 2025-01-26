@@ -37,7 +37,7 @@ const Navbar = () => {
 
   // Drawer content for mobile view
   const drawerContent = (
-    <Box sx={{ width: 250 }} role="presentation" >
+    <Box sx={{ width: 200 }} role="presentation" >
       <List >
         <ListItem button component="a" href="/menu" sx={{color:'#ab3434'}} >
           <ListItemText primary="Menu" />
@@ -66,6 +66,7 @@ const Navbar = () => {
             </>
           ) : null
         ) : (
+          // if no user logged in
           <ListItem button component="a" href="/login" sx={{color:'#ab3434'}}>
             <ListItemText primary="Login" />
           </ListItem>

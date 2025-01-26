@@ -84,6 +84,8 @@ const AdminPage = () => {
     }
   };
 
+
+
   const handleAddAdminClick = () => {
     setOpenAddAdminDialog(true);
   };
@@ -219,7 +221,6 @@ const AdminPage = () => {
         {
           foodName,
           foodPrice,
-          imageUrl,
         },
         {
           auth: {
@@ -280,6 +281,7 @@ const AdminPage = () => {
         </Button>
       </Box>
 
+      {/* admin dialog */}
       <Dialog open={openAddAdminDialog} onClose={handleAddAdminClose}>
         <DialogTitle>Add Admin</DialogTitle>
         <DialogContent>
@@ -288,8 +290,8 @@ const AdminPage = () => {
             fullWidth
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            error={!!validationErrors.username}
-            helperText={validationErrors.username}
+            error={!!validationErrors.username}   // to show if there is an error (error string = true, but make it false, to show error again make it true)
+            helperText={validationErrors.username} // for displaying the username error
             sx={{ mb: 2 }}
           />
           <TextField
@@ -308,6 +310,7 @@ const AdminPage = () => {
         </DialogActions>
       </Dialog>
 
+      {/* add item dialog */}
       <Dialog open={openAddItemDialog} onClose={handleAddItemClose}>
         <DialogTitle>Add Menu Item</DialogTitle>
         <DialogContent>
@@ -335,6 +338,7 @@ const AdminPage = () => {
         </DialogActions>
       </Dialog>
 
+      {/* menu item for admin dashboard */}
       <Grid container spacing={3}>
         {menuItems.map((menuItem) => (
           <Grid item xs={12} sm={6} key={menuItem.id}>

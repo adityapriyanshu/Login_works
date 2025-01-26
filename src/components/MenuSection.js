@@ -16,7 +16,7 @@ import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const PEXELS_API_KEY = 'YOUR_PEXELS_API_KEY'; // Replace with your Pexels API key
+const PEXELS_API_KEY = 'FdMFbn8GyN0ud5DoVrGCbgc79osckWiESupQuC7ipZmFfDS301HCBO2V'; // Pexels API key
 
 function MenuSection() {
   const [menuItems, setMenuItems] = useState([]);
@@ -37,7 +37,7 @@ function MenuSection() {
     return images;
   };
 
-  // Import all images from the Images directory
+
   const localImages = importAll(require.context('./Images', false, /\.(png|jpe?g|svg)$/));
 
   // Function to fetch image from Pexels API
@@ -71,6 +71,10 @@ function MenuSection() {
     return pexelsImageUrl;
   };
 
+
+
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -88,6 +92,10 @@ function MenuSection() {
     };
     fetchData();
   }, []);
+
+
+
+
 
   const handleQuantityChange = (itemId, change) => {
     setCartItems((prevCartItems) => {
@@ -123,6 +131,10 @@ function MenuSection() {
     }, 0);
   };
 
+
+
+
+  // Place the order by sending the correct json format.
   const placeOrder = async () => {
     if (!localStorage.getItem('username')) {
       toast.error('Login into your account!');
@@ -163,8 +175,8 @@ function MenuSection() {
     try {
       const response = await axios.post('http://localhost:8082/customer', orderData, {
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Basic ${btoa(`${storedUsername}:${storedPassword}`)}`,
+          'Content-Type': 'application/json', // to tell the server that orderData is in json format.
+          Authorization: `Basic ${btoa(`${storedUsername}:${storedPassword}`)}`, //btoa base64 format.
         },
       });
       console.log('Order placed successfully:', response.data);
@@ -193,6 +205,9 @@ function MenuSection() {
     }
   };
 
+
+
+  
   const handleChangePage = (event, value) => {
     setPage(value);
   };
@@ -206,7 +221,7 @@ function MenuSection() {
   return (
     <div style={{ padding: '2rem' }}>
       <ToastContainer />
-      <Typography variant="h4" align="center" gutterBottom>
+      <Typography variant="h4" align="center" gutterBottom mt={5}>
         Full Menu
       </Typography>
       <Grid container spacing={3}>
@@ -242,6 +257,7 @@ function MenuSection() {
           </Grid>
         ))}
       </Grid>
+      
       <Pagination
         count={Math.ceil(menuItems.length / itemsPerPage)}
         page={page}
@@ -285,8 +301,8 @@ function MenuSection() {
           margin="normal"
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
-          error={!!validationErrors.customerName}
-          helperText={validationErrors.customerName}
+          error={!!validationErrors.customerName}  // means True if there's an error
+          helperText={validationErrors.customerName} // for displaying the customerName error
         />
         <TextField
           label="Phone Number"

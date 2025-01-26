@@ -20,6 +20,7 @@ const HomeBody = () => {
         position: 'relative',
       }}
     >
+      {/* this div cover the parent div using style so that I can darken the image */}
       <div
         style={{
           position: 'absolute',
@@ -27,9 +28,10 @@ const HomeBody = () => {
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
         }}
       ></div>
+      {/* box is used to center both the text */}
       <Box
         sx={{
           display: 'flex',
@@ -48,12 +50,12 @@ const HomeBody = () => {
           color="white"
           sx={{
             mb: 1,
-            pt: isMobile ? 10: 0,
-            mt: isMobile ? 10 : 20, 
+            pt: isMobile ? 10 : 0,
+            mt: isMobile ? 10 : 20,
             fontFamily: "'Cormorant', 'serif'",
             fontWeight: 700,
             fontStyle: 'italic',
-            fontSize: isMobile ? '6vh' : '14vh', 
+            fontSize: isMobile ? '6vh' : '14vh',
           }}
         >
           Welcome to Gourmet Heaven
@@ -63,8 +65,8 @@ const HomeBody = () => {
           color="white"
           sx={{
             textAlign: 'center',
-            fontSize: isMobile ? '2.5vh' : 'inherit', 
-            px: isMobile ? 5 : 0, 
+            fontSize: isMobile ? '2.5vh' : 'inherit',
+            px: isMobile ? 5 : 0,
           }}
         >
           Your friendly neighbourhood restaurant serving delicious food.
