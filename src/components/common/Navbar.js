@@ -77,7 +77,7 @@ const Navbar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar elevation={12} position="fixed" sx={{ backgroundColor: '#ab3434' }}>
+      <AppBar elevation={12} position="fixed" sx={{ backgroundColor: '#ab3434'}}>
         <Toolbar>
           {/* Hamburger Menu Icon for Mobile */}
           {isMobile && (
